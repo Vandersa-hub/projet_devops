@@ -51,7 +51,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/ELCALVO/Projet_devOPS</url>
+            <url>https://maven.pkg.github.com/Vandersa-hub/projet_devops</url>
         </repository>
     </distributionManagement>
 </project>
