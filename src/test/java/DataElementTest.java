@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
@@ -30,6 +31,13 @@ public class DataElementTest {
         assertEquals(dataElementTest.getElements(),arrayTest);
     }
 
+    @Test
+    public void shouldCreateDataElementDate(){
+        ArrayList<LocalDate> arrayTest = generateDateArrayTest();
+        DataElement<LocalDate> dataElementTest = new DataElement<>("DateTest",arrayTest);
+        assertNotNull("DataElement not null Date",dataElementTest);
+        assertEquals(dataElementTest.getElements(),arrayTest);
+    }
 
     private ArrayList<Integer> generateIntegerArrayTest() {
         ArrayList<Integer> arrayTest = new ArrayList<>();
@@ -52,6 +60,14 @@ public class DataElementTest {
         arrayTest.add(199908908.2783f);
         arrayTest.add(22.f);
         arrayTest.add(444444.444f);
+        return arrayTest;
+    }
+
+    private ArrayList<LocalDate> generateDateArrayTest() {
+        ArrayList<LocalDate> arrayTest= new ArrayList<>();
+        arrayTest.add(LocalDate.now());
+        arrayTest.add(LocalDate.now().plusDays(12));
+        arrayTest.add(LocalDate.now().minusYears(42));
         return arrayTest;
     }
 }
