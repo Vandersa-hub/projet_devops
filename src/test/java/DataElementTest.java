@@ -22,6 +22,14 @@ public class DataElementTest {
         assertEquals(dataElementTest.getElements(),arrayTest);
     }
 
+    @Test
+    public void shouldCreateDataElementFloat(){
+        ArrayList<Float> arrayTest = generateFloatArrayTest();
+        DataElement<Float> dataElementTest = new DataElement<>("FloatTest",arrayTest);
+        assertNotNull("DataElement not null Float",dataElementTest);
+        assertEquals(dataElementTest.getElements(),arrayTest);
+    }
+
 
     private ArrayList<Integer> generateIntegerArrayTest() {
         ArrayList<Integer> arrayTest = new ArrayList<>();
@@ -35,6 +43,15 @@ public class DataElementTest {
         ArrayList<String> arrayTest= new ArrayList<>();
         arrayTest.add("a");
         arrayTest.add("Lorem Ipsum !");
+        return arrayTest;
+    }
+
+    private ArrayList<Float> generateFloatArrayTest() {
+        ArrayList<Float> arrayTest= new ArrayList<>();
+        arrayTest.add(1.1f);
+        arrayTest.add(199908908.2783f);
+        arrayTest.add(22.f);
+        arrayTest.add(444444.444f);
         return arrayTest;
     }
 }
