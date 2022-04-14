@@ -14,4 +14,8 @@ public class DataFrame<DataElement> {
             this.dataArray.put(columnsName, data.get(columnsNames.indexOf(columnsName)));
         }
     }
+
+    public Map<String, DataElement> getDataArray() {
+        return dataArray;
+    }
 }
