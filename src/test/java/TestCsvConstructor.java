@@ -1,7 +1,6 @@
 import org.junit.*;
 import java.util.*;
 
-import static jdk.nashorn.internal.objects.Global.print;
 
 public class TestCsvConstructor {
     @Test
