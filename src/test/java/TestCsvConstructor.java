@@ -3,10 +3,15 @@ import java.util.*;
 
 
 public class TestCsvConstructor {
-    @Test
-    public void test(){
-        Map<String, DataElement> data = new DataFrame("src/main/csv/csvTest.csv").getDataArray();
+    private Map<String, DataElement> data;
 
+    @Before
+    public  void Initialize() {
+        data = new DataFrame("src/main/csv/csvTest.csv").getDataArray();
+    }
+
+    @Test
+    public void shouldTestConstructor(){
         //Assert.assertTrue(data.containsKey(""));
         Assert.assertTrue(data.containsKey("matiere"));
         Assert.assertTrue(data.containsKey("nbeleves"));
