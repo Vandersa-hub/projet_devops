@@ -73,7 +73,87 @@ public class DataFrame {
         }
     }
 
-    public Map<String, DataElement> getDataArray () {
+    public Map<String, DataElement> getDataArray() {
         return dataArray;
+    }
+
+    public Double mean(String label) {
+        ArrayList array = dataArray.get(label).getElements();
+        Object type = array.get(0);
+        double mean = 0;
+        if (array == null) {
+            System.err.println("Unrecognized label : " + label);
+            return null;
+        } else if (type instanceof Integer) {
+            for (int line = 0; line < array.size(); line++) {
+                mean += (double)(int) array.get(line);
+            }
+            return mean / array.size();
+        } else if (type instanceof Double) {
+            for (int line = 0; line < array.size(); line++) {
+                mean += (double) array.get(line);
+            }
+            return mean / array.size();
+        } else {
+            System.err.println("You try to mean strings or something");
+            return null;
+        }
+    }
+
+    public Double max(String label) {
+        Double max = - Double.MAX_VALUE;
+        ArrayList array = dataArray.get(label).getElements();
+        Object type = array.get(0);
+        if (array == null) {
+            System.err.println("Unrecognized label : " + label);
+            return null;
+        }
+        else if (type instanceof Integer) {
+            for (int line = 0; line < array.size(); line++) {
+                if (max < (double)(int) array.get(line)) {
+                    max = (double)(int) array.get(line);
+                }
+            }
+            return max;
+        }
+        else if (type instanceof Double) {
+            for (int line = 0; line < array.size(); line++) {
+                if (max < (double) array.get(line)) {
+                    max = (double) array.get(line);
+                }
+            }
+            return max;
+        }else {
+            System.err.println("You try to mean strings or something");
+            return null;
+        }
+    }
+
+    public Double min(String label) {
+        Double min = Double.MAX_VALUE;
+        ArrayList array = dataArray.get(label).getElements();
+        Object type = array.get(0);
+        if (array == null) {
+            System.err.println("Unrecognized label : " + label);
+            return null;
+        } else if (type instanceof Integer) {
+            for (int line = 0; line < array.size(); line++) {
+                if (min > (double)(int) array.get(line)) {
+                    min = (double)(int) array.get(line);
+                }
+            }
+            return min;
+        }
+        else if (type instanceof Double) {
+            for (int line = 0; line < array.size(); line++) {
+                if ((double) array.get(line) < min) {
+                    min = (double) array.get(line);
+                }
+            }
+            return min;
+        }else {
+            System.err.println("You try to mean strings or something");
+            return null;
+        }
     }
 }
