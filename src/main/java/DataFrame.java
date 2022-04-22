@@ -176,23 +176,10 @@ public class DataFrame {
      */
     public String defaultDisplay() {
         StringBuilder result = new StringBuilder("Ligne");
-        Set<String> keys = dataArray.keySet();
-        int nbLine = getNumberOfLine();
-
-        keys.forEach(key -> result.append(" " + key));
-
+        dataArray.keySet().forEach(key -> result.append(" " + key));
         result.append("\n");
 
-        for (int i = 0; i < nbLine; i++) {
-            result.append(i);
-            for (String key : keys) {
-                result.append(" " + dataArray.get(key).getElements().get(i));
-            }
-            if (i < nbLine - 1)
-                result.append("\n");
-        }
-
-        System.out.println(result);
+        formatLines(getNumberOfLine(), result);
 
         return result.toString();
     }
@@ -202,24 +189,24 @@ public class DataFrame {
             return null;
         
         StringBuilder result = new StringBuilder("Ligne");
-        Set<String> keys = dataArray.keySet();
-
-        keys.forEach(key -> result.append(" " + key));
+        dataArray.keySet().forEach(key -> result.append(" " + key));
 
         result.append("\n");
 
-        for (int i = 0; i < numberOfLine; i++) {
-            result.append(i);
-            for (String key : keys) {
-                result.append(" " + dataArray.get(key).getElements().get(i));
-            }
-            if (i < numberOfLine - 1)
-                result.append("\n");
-        }
-
-        System.out.println(result);
+        formatLines(numberOfLine, result);
 
         return result.toString();
+    }
+
+    private void formatLines(int nbLinesMax, StringBuilder result) {
+        for (int i = 0; i < nbLinesMax; i++) {
+            result.append(i);
+            for (String key : dataArray.keySet()) {
+                result.append(" " + dataArray.get(key).getElements().get(i));
+            }
+            if (i < nbLinesMax - 1)
+                result.append("\n");
+        }
     }
 
     /**
