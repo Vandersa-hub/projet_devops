@@ -205,4 +205,8 @@ public class DataFrame {
     private int getNumberOfLine() {
         return dataArray.values().stream().findFirst().get().getElements().size();
     }
+
+    public String displayFirstLines(int i) {
+        return "";
+    }
 }
