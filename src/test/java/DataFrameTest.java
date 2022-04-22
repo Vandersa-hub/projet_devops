@@ -1,8 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Map;
-
 import static org.junit.Assert.*;
 
 public class DataFrameTest {
@@ -21,7 +19,7 @@ public class DataFrameTest {
                 "2 mathematiques 32 7.2\n" +
                 "3 histoire 12 11.4";
 
-        assertEquals(targetDisplay, dataFrame.display());
+        assertEquals(targetDisplay, dataFrame.defaultDisplay());
     }
 
 }

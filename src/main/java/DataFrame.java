@@ -76,6 +76,11 @@ public class DataFrame {
         return dataArray;
     }
 
+    /**
+     * Calcule la moyenne des valeurs de la colonne nommée "label".
+     * @param label
+     * @return La moyenne ou null s'il s'agit d'une colonne de String.
+     */
     public Double mean(String label) {
         ArrayList array = dataArray.get(label).getElements();
         Object type = array.get(0);
@@ -99,6 +104,11 @@ public class DataFrame {
         }
     }
 
+    /**
+     * Calcule le maximum des valeurs de la colonne nommée "label".
+     * @param label
+     * @return La valeur maximale ou null s'il s'agit d'une colonne de String ou de Date.
+     */
     public Double max(String label) {
         Double max = -Double.MAX_VALUE;
         ArrayList array = dataArray.get(label).getElements();
@@ -126,6 +136,11 @@ public class DataFrame {
         }
     }
 
+    /**
+     * Calcule le minimum des valeurs de la colonne nommée "label".
+     * @param label
+     * @return La valeur minimale ou null s'il s'agit d'une colonne de String ou de Date.
+     */
     public Double min(String label) {
         Double min = Double.MAX_VALUE;
         ArrayList array = dataArray.get(label).getElements();
@@ -159,7 +174,7 @@ public class DataFrame {
      *
      * @return Une chaine de caractère contenant l'ensemble des données du DataFrame sous une forme donnée.
      */
-    public String display() {
+    public String defaultDisplay() {
         StringBuilder result = new StringBuilder("Ligne");
         Set<String> keys = dataArray.keySet();
         int nbLine = getNumberOfLine();
@@ -177,7 +192,7 @@ public class DataFrame {
                 result.append("\n");
         }
 
-        System.out.println(result.toString());
+        System.out.println(result);
 
         return result.toString();
     }
