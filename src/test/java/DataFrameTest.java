@@ -8,7 +8,7 @@ public class DataFrameTest {
 
     @Before
     public  void initialize() {
-        dataFrame = new DataFrame("src/main/csv/csvTest.csv");
+        dataFrame = new DataFrame("src/main/resources/csv/csvTest.csv");
     }
 
     @Test
