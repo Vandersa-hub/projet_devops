@@ -242,5 +242,7 @@ public class DataFrame {
     }
 
 
-
+    public String display(String param) {
+        return "";
+    }
 }

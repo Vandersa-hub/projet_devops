@@ -72,4 +72,32 @@ public class DataFrameTest {
 
     }
 
+    /**
+     * Cette méthode de choix d'affichage est inspiré de ce qu'il se fait en python.
+     */
+    @Test
+    public void shouldChooseTheRightDisplayFormat() {
+        //Aucun paramètre = defaut
+        String targetDisplay = "Ligne matiere nbeleves moyenne\n" +
+                "0 anglais 41 10.2\n" +
+                "1 francais 23 14.2\n" +
+                "2 mathematiques 32 7.2\n" +
+                "3 histoire 12 11.4";
+        assertEquals(targetDisplay, dataFrame.display(""));
+
+        //:nbLines = n premières lignes
+        targetDisplay = "Ligne matiere nbeleves moyenne\n" +
+                "0 anglais 41 10.2\n" +
+                "1 francais 23 14.2";
+        assertEquals(targetDisplay, dataFrame.display(":2"));
+
+        //-nbLines: = n dernières lignes
+        targetDisplay = "Ligne matiere nbeleves moyenne\n" +
+                "1 francais 23 14.2\n" +
+                "2 mathematiques 32 7.2\n" +
+                "3 histoire 12 11.4";
+        assertEquals(targetDisplay, dataFrame.display("-3:"));
+
+    }
+
 }
