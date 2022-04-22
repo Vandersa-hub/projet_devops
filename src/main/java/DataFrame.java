@@ -1,4 +1,4 @@
-import com.opencsv.*;
+import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvException;
 
 import java.io.FileNotFoundException;
@@ -7,16 +7,15 @@ import java.io.IOException;
 import java.util.*;
 
 
-
 public class DataFrame {
     private Map<String, DataElement> dataArray;
 
     public DataFrame() {
-        this.dataArray = new HashMap<>();
+        this.dataArray = new LinkedHashMap<>();
     }
 
     public DataFrame(ArrayList<DataElement> data) {
-        this.dataArray = new HashMap<>();
+        this.dataArray = new LinkedHashMap<>();
         for (DataElement dataElement : data) {
             this.dataArray.put(dataElement.getDataLabel(), dataElement);
         }
@@ -24,7 +23,7 @@ public class DataFrame {
 
     public DataFrame(String csv) {
         try {
-            this.dataArray = new HashMap<>();
+            this.dataArray = new LinkedHashMap<>();
             List<String[]> data = new CSVReaderBuilder(new FileReader(csv)).build().readAll();
             for (int y = 0; y < data.get(0).length; y++) {
                 try {
@@ -86,7 +85,7 @@ public class DataFrame {
             return null;
         } else if (type instanceof Integer) {
             for (int line = 0; line < array.size(); line++) {
-                mean += (double)(int) array.get(line);
+                mean += (double) (int) array.get(line);
             }
             return mean / array.size();
         } else if (type instanceof Double) {
@@ -101,29 +100,27 @@ public class DataFrame {
     }
 
     public Double max(String label) {
-        Double max = - Double.MAX_VALUE;
+        Double max = -Double.MAX_VALUE;
         ArrayList array = dataArray.get(label).getElements();
         Object type = array.get(0);
         if (array == null) {
             System.err.println("Unrecognized label : " + label);
             return null;
-        }
-        else if (type instanceof Integer) {
+        } else if (type instanceof Integer) {
             for (int line = 0; line < array.size(); line++) {
-                if (max < (double)(int) array.get(line)) {
-                    max = (double)(int) array.get(line);
+                if (max < (double) (int) array.get(line)) {
+                    max = (double) (int) array.get(line);
                 }
             }
             return max;
-        }
-        else if (type instanceof Double) {
+        } else if (type instanceof Double) {
             for (int line = 0; line < array.size(); line++) {
                 if (max < (double) array.get(line)) {
                     max = (double) array.get(line);
                 }
             }
             return max;
-        }else {
+        } else {
             System.err.println("You try to mean strings or something");
             return null;
         }
@@ -138,20 +135,19 @@ public class DataFrame {
             return null;
         } else if (type instanceof Integer) {
             for (int line = 0; line < array.size(); line++) {
-                if (min > (double)(int) array.get(line)) {
-                    min = (double)(int) array.get(line);
+                if (min > (double) (int) array.get(line)) {
+                    min = (double) (int) array.get(line);
                 }
             }
             return min;
-        }
-        else if (type instanceof Double) {
+        } else if (type instanceof Double) {
             for (int line = 0; line < array.size(); line++) {
                 if ((double) array.get(line) < min) {
                     min = (double) array.get(line);
                 }
             }
             return min;
-        }else {
+        } else {
             System.err.println("You try to mean strings or something");
             return null;
         }
@@ -160,9 +156,38 @@ public class DataFrame {
     /**
      * Méthode de mise en forme par défaut de l'affichage.
      * Sélection de la totalité du DataFrame.
+     *
      * @return Une chaine de caractère contenant l'ensemble des données du DataFrame sous une forme donnée.
      */
     public String display() {
-        return "";
+        StringBuilder result = new StringBuilder("Ligne");
+        Set<String> keys = dataArray.keySet();
+        int nbLine = getNumberOfLine();
+
+        keys.forEach(key -> result.append(" " + key));
+
+        result.append("\n");
+
+        for (int i = 0; i < nbLine; i++) {
+            result.append(i);
+            for (String key : keys) {
+                result.append(" " + dataArray.get(key).getElements().get(i));
+            }
+            if (i < nbLine - 1)
+                result.append("\n");
+        }
+
+        System.out.println(result.toString());
+
+        return result.toString();
+    }
+
+    /**
+     * Puisque toutes les colonnes ont la même taille, nous ne renvoyons que la taille de la première.
+     *
+     * @return Le nombre de ligne d'une colonne de notre DataFrame
+     */
+    private int getNumberOfLine() {
+        return dataArray.values().stream().findFirst().get().getElements().size();
     }
 }
