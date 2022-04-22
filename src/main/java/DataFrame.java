@@ -175,23 +175,25 @@ public class DataFrame {
      * @return Une chaine de caractère contenant l'ensemble des données du DataFrame sous une forme donnée.
      */
     public String defaultDisplay() {
-        StringBuilder result = new StringBuilder("Ligne");
-        dataArray.keySet().forEach(key -> result.append(" " + key));
-        result.append("\n");
+        StringBuilder result = getDisplayHeader();
 
         formatLines(getNumberOfLine(), result);
 
         return result.toString();
     }
 
+    private StringBuilder getDisplayHeader() {
+        StringBuilder result = new StringBuilder("Ligne");
+        dataArray.keySet().forEach(key -> result.append(" " + key));
+        result.append("\n");
+        return result;
+    }
+
     public String displayFirstLines(int numberOfLine) {
         if(numberOfLine > getNumberOfLine())
             return null;
-        
-        StringBuilder result = new StringBuilder("Ligne");
-        dataArray.keySet().forEach(key -> result.append(" " + key));
 
-        result.append("\n");
+        StringBuilder result = getDisplayHeader();
 
         formatLines(numberOfLine, result);
 
