@@ -182,22 +182,26 @@ public class DataFrame {
         return result.toString();
     }
 
+    public String displayFirstLines(int nbLines) {
+        if(nbLines > getNumberOfLine())
+            return null;
+
+        StringBuilder result = getDisplayHeader();
+
+        formatLines(nbLines, result);
+
+        return result.toString();
+    }
+
+    public Object displayEndLines(int nbLines) {
+        return "";
+    }
+
     private StringBuilder getDisplayHeader() {
         StringBuilder result = new StringBuilder("Ligne");
         dataArray.keySet().forEach(key -> result.append(" " + key));
         result.append("\n");
         return result;
-    }
-
-    public String displayFirstLines(int numberOfLine) {
-        if(numberOfLine > getNumberOfLine())
-            return null;
-
-        StringBuilder result = getDisplayHeader();
-
-        formatLines(numberOfLine, result);
-
-        return result.toString();
     }
 
     private void formatLines(int nbLinesMax, StringBuilder result) {
@@ -219,6 +223,7 @@ public class DataFrame {
     private int getNumberOfLine() {
         return dataArray.values().stream().findFirst().get().getElements().size();
     }
+
 
 
 }

@@ -23,7 +23,7 @@ public class DataFrameTest {
     }
 
     @Test
-    public void shouldDisplayNFirstLine() {
+    public void shouldDisplayNFirstLines() {
         String targetDisplay = "Ligne matiere nbeleves moyenne\n";
         assertEquals(targetDisplay, dataFrame.displayFirstLines(0));
 
@@ -40,6 +40,36 @@ public class DataFrameTest {
         assertEquals(targetDisplay, dataFrame.displayFirstLines(4));
 
         assertEquals(null, dataFrame.displayFirstLines(5));
+    }
+
+    @Test
+    public void shouldDisplayNEndLines() {
+        String targetDisplay = "Ligne matiere nbeleves moyenne\n";
+        assertEquals(targetDisplay, dataFrame.displayEndLines(0));
+
+        targetDisplay += "3 histoire 12 11.4";
+        assertEquals(targetDisplay, dataFrame.displayEndLines(1));
+
+        targetDisplay = "Ligne matiere nbeleves moyenne\n" +
+                "2 mathematiques 32 7.2\n" +
+                "3 histoire 12 11.4";
+        assertEquals(targetDisplay, dataFrame.displayEndLines(2));
+
+        targetDisplay = "Ligne matiere nbeleves moyenne\n" +
+                "1 francais 23 14.2\n" +
+                "2 mathematiques 32 7.2\n" +
+                "3 histoire 12 11.4";
+        assertEquals(targetDisplay, dataFrame.displayEndLines(3));
+
+        targetDisplay = "Ligne matiere nbeleves moyenne\n" +
+                "0 anglais 41 10.2\n" +
+                "1 francais 23 14.2\n" +
+                "2 mathematiques 32 7.2\n" +
+                "3 histoire 12 11.4";
+        assertEquals(targetDisplay, dataFrame.displayEndLines(4));
+
+        assertEquals(null, dataFrame.displayEndLines(5));
+
     }
 
 }
