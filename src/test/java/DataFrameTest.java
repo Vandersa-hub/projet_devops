@@ -85,6 +85,8 @@ public class DataFrameTest {
                 "3 histoire 12 11.4";
         assertEquals(targetDisplay, dataFrame.display(""));
 
+        assertEquals(targetDisplay, dataFrame.display("toto"));
+
         //:nbLines = n premières lignes
         targetDisplay = "Ligne matiere nbeleves moyenne\n" +
                 "0 anglais 41 10.2\n" +
