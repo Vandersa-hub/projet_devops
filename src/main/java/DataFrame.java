@@ -156,4 +156,13 @@ public class DataFrame {
             return null;
         }
     }
+
+    /**
+     * Méthode de mise en forme par défaut de l'affichage.
+     * Sélection de la totalité du DataFrame.
+     * @return Une chaine de caractère contenant l'ensemble des données du DataFrame sous une forme donnée.
+     */
+    public String display() {
+        return "";
+    }
 }
