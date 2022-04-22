@@ -26,7 +26,7 @@ public class DataFrameTest {
     public void shouldDisplayNFirstLine() {
         String targetDisplay = "Ligne matiere nbeleves moyenne\n" +
                 "0 anglais 41 10.2\n" +
-                "1 francais 23 14.2\n";
+                "1 francais 23 14.2";
 
         assertEquals(targetDisplay, dataFrame.displayFirstLines(2));
     }

@@ -197,6 +197,28 @@ public class DataFrame {
         return result.toString();
     }
 
+    public String displayFirstLines(int numberOfLine) {
+        StringBuilder result = new StringBuilder("Ligne");
+        Set<String> keys = dataArray.keySet();
+
+        keys.forEach(key -> result.append(" " + key));
+
+        result.append("\n");
+
+        for (int i = 0; i < numberOfLine; i++) {
+            result.append(i);
+            for (String key : keys) {
+                result.append(" " + dataArray.get(key).getElements().get(i));
+            }
+            if (i < numberOfLine - 1)
+                result.append("\n");
+        }
+
+        System.out.println(result);
+
+        return result.toString();
+    }
+
     /**
      * Puisque toutes les colonnes ont la même taille, nous ne renvoyons que la taille de la première.
      *
@@ -206,7 +228,5 @@ public class DataFrame {
         return dataArray.values().stream().findFirst().get().getElements().size();
     }
 
-    public String displayFirstLines(int i) {
-        return "";
-    }
+
 }
