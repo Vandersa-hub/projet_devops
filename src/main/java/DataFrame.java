@@ -198,6 +198,9 @@ public class DataFrame {
     }
 
     public String displayFirstLines(int numberOfLine) {
+        if(numberOfLine > getNumberOfLine())
+            return null;
+        
         StringBuilder result = new StringBuilder("Ligne");
         Set<String> keys = dataArray.keySet();
 
