@@ -177,7 +177,7 @@ public class DataFrame {
     public String defaultDisplay() {
         StringBuilder result = getDisplayHeader();
 
-        formatLines(getNumberOfLine(), result);
+        formatLines(0, getNumberOfLine(), result);
 
         return result.toString();
     }
@@ -188,13 +188,20 @@ public class DataFrame {
 
         StringBuilder result = getDisplayHeader();
 
-        formatLines(nbLines, result);
+        formatLines(0, nbLines, result);
 
         return result.toString();
     }
 
     public Object displayEndLines(int nbLines) {
-        return "";
+        if(nbLines > getNumberOfLine())
+            return null;
+
+        StringBuilder result = getDisplayHeader();
+
+        formatLines(getNumberOfLine()-nbLines ,getNumberOfLine(), result);
+
+        return result.toString();
     }
 
     private StringBuilder getDisplayHeader() {
@@ -204,13 +211,13 @@ public class DataFrame {
         return result;
     }
 
-    private void formatLines(int nbLinesMax, StringBuilder result) {
-        for (int i = 0; i < nbLinesMax; i++) {
+    private void formatLines(int linesMin, int linesMax, StringBuilder result) {
+        for (int i = linesMin; i < linesMax; i++) {
             result.append(i);
             for (String key : dataArray.keySet()) {
                 result.append(" " + dataArray.get(key).getElements().get(i));
             }
-            if (i < nbLinesMax - 1)
+            if (i < linesMax - 1)
                 result.append("\n");
         }
     }
