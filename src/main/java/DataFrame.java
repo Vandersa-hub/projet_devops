@@ -182,6 +182,11 @@ public class DataFrame {
         return result.toString();
     }
 
+    /**
+     * Recherche les élements de chaque colonnes du début jusqu'à nbLines et les formattent pour les renvoyer.
+     * @param nbLines
+     * @return Un chaine de caractères contenant les valeurs des nbLines premières lignes de chaque colonnes.
+     */
     public String displayFirstLines(int nbLines) {
         if(nbLines > getNumberOfLine())
             return null;
@@ -193,6 +198,11 @@ public class DataFrame {
         return result.toString();
     }
 
+    /**
+     * Recherche les élements de chaque colonnes à partir des nbLines dernières lignes jusqu'à la fin et les formattent pour les renvoyer.
+     * @param nbLines
+     * @return Un chaine de caractères contenant les valeurs des nbLines dernières lignes de chaque colonne.
+     */
     public Object displayEndLines(int nbLines) {
         if(nbLines > getNumberOfLine())
             return null;
