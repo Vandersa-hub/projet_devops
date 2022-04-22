@@ -1,5 +1,6 @@
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvException;
+import org.apache.commons.lang3.RegExUtils;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -203,7 +204,7 @@ public class DataFrame {
      * @param nbLines
      * @return Un chaine de caractères contenant les valeurs des nbLines dernières lignes de chaque colonne.
      */
-    public Object displayEndLines(int nbLines) {
+    public String displayEndLines(int nbLines) {
         if(nbLines > getNumberOfLine())
             return null;
 
@@ -243,6 +244,11 @@ public class DataFrame {
 
 
     public String display(String param) {
-        return "";
+        if(param.matches(":[0-9]+")) {
+            return displayFirstLines(Integer.parseInt(param.substring(1)));
+        } else if(param.matches("-[0-9]+:")) {
+            return displayEndLines(Integer.parseInt(param.substring(1, param.indexOf(':'))));
+        }
+        return defaultDisplay();
     }
 }
