@@ -7,7 +7,7 @@ public class TestCsvConstructor {
 
     @Before
     public  void Initialize() {
-        data = new DataFrame("src/main/csv/csvTest.csv").getDataArray();
+        data = new DataFrame("src/main/resources/csv/csvTest.csv").getDataArray();
     }
 
     @Test
