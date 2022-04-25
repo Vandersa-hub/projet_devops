@@ -1,6 +1,5 @@
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvException;
-import org.apache.commons.lang3.RegExUtils;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -8,7 +7,7 @@ import java.io.IOException;
 import java.util.*;
 
 
-public class DataFrame {
+public class DataFrame{
     private Map<String, DataElement> dataArray;
 
     public DataFrame() {
@@ -20,6 +19,10 @@ public class DataFrame {
         for (DataElement dataElement : data) {
             this.dataArray.put(dataElement.getDataLabel(), dataElement);
         }
+    }
+
+    public DataFrame(DataFrame frame){
+        this.dataArray = new HashMap<>(frame.getDataArray());
     }
 
     public DataFrame(String csv) {
@@ -251,4 +254,60 @@ public class DataFrame {
         }
         return defaultDisplay();
     }
+
+    /**
+     * Selectionne les n premieres lignes d'un dataframe et en créer un nouveau avec.
+     * @param frame : dataframe sur lequel on travaille
+     * @param param : numéro de la ligne a isoler
+     * @return nouvel element DataFrame avec la/les ligne(s) souhaité(es)
+     */
+    public DataFrame selectLines(DataFrame frame, String param){
+        if(param.matches(":[0-9]+")) {
+                return createSubDataFrame(frame, Integer.parseInt(param.substring(1)));
+        }/* else if(param.matches("-[0-9]+:")) {
+
+        }else if (param.matches("[0-9]+")){
+
+        }*/
+        return createSubDataFrame(this, Integer.parseInt(param));
+    }
+
+    public DataFrame selectColumn(DataFrame frame, String label){
+        DataFrame copyFrame = new DataFrame(frame);
+        copyFrame.getDataArray().keySet().removeIf(key -> !key.equals(label));
+        return copyFrame;
+    }
+
+    /**
+     * Selectionne plusieurs colonnes et crée un nouvel element DataFrame correspondant
+     * @param frame : le dataframe sur lequel on travaille
+     * @param labels : le label des colonnes que l'on veut extraire
+     * @return un nouvel element DataFrame
+     */
+    public DataFrame selectColumns(DataFrame frame, String labels){
+        String[] lab = labels.split(":");
+        DataFrame returnFrame = new DataFrame(frame);
+        returnFrame.dataArray = new LinkedHashMap<>();
+        for(int i = 0; i < lab.length; i++){
+            DataFrame copyFrame = selectColumn(frame, lab[i]);
+            returnFrame.dataArray.putAll(copyFrame.dataArray);
+        }
+        return returnFrame;
+    }
+
+    /**
+     * Création d'un dataFrame ne contenant que ce que la ligne que l'on souhaite
+     * @param frame : le dataframe sur lequel on travaille
+     * @param param integer : numéro de la ligne que l'on veut isoler
+     * @return nouveau dataframe
+     */
+    public DataFrame createSubDataFrame(DataFrame frame, Integer param){
+        int i = 0;
+        DataFrame copyFrame = new DataFrame(frame);
+        for(Map.Entry<String, DataElement> entry : copyFrame.getDataArray().entrySet()){
+            copyFrame.getDataArray().get(entry.getKey()).getElements().removeIf(e -> !e.equals(copyFrame.getDataArray().get(entry.getKey()).getElements().get(param)));
+        }
+        return copyFrame;
+    }
+
 }
