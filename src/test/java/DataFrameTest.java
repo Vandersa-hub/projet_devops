@@ -110,7 +110,7 @@ public class DataFrameTest {
     public void shouldSelectTheRightColumns(){
 
         //Colonne "Moyenne"
-        DataFrame columnMoyenne = dataFrame.selectColumn(dataFrame, "moyenne");
+        DataFrame columnMoyenne = dataFrame.selectColumn("moyenne");
         String targetDisplay = "Ligne moyenne\n" +
                 "0 10.2\n" +
                 "1 14.2\n" +
@@ -120,7 +120,7 @@ public class DataFrameTest {
         assertEquals(targetDisplay, columnMoyenne.display(""));
 
         //Colonne "Matiere"
-        DataFrame columnMatiere = dataFrame.selectColumn(dataFrame, "matiere");
+        DataFrame columnMatiere = dataFrame.selectColumn("matiere");
         targetDisplay = "Ligne matiere\n" +
                 "0 anglais\n" +
                 "1 francais\n" +
@@ -129,7 +129,7 @@ public class DataFrameTest {
 
         assertEquals(targetDisplay, columnMatiere.display(""));
 
-        DataFrame columnNbEleves = dataFrame.selectColumn(dataFrame, "nbeleves");
+        DataFrame columnNbEleves = dataFrame.selectColumn("nbeleves");
         targetDisplay = "Ligne nbeleves\n" +
                 "0 41\n" +
                 "1 23\n" +
@@ -139,7 +139,7 @@ public class DataFrameTest {
         assertEquals(targetDisplay, columnNbEleves.display(""));
 
         //Colonne Matiere et nbEleves
-        DataFrame columns = dataFrame.selectColumns(dataFrame, "matiere:nbeleves");
+        DataFrame columns = dataFrame.selectColumns( "matiere:nbeleves");
         targetDisplay = "Ligne matiere nbeleves\n" +
                 "0 anglais 41\n" +
                 "1 francais 23\n" +
@@ -152,30 +152,46 @@ public class DataFrameTest {
     public void shouldSelectTheRightRows(){
         //Ligne n°1
 
-        DataFrame row1 = dataFrame.selectLines(dataFrame, "0");
-        String targetDisplay = "Ligne nbeleves matiere moyenne\n"+
-                                "0 41 anglais 10.2";
+        DataFrame row1 = dataFrame.selectLines("0");
+        String targetDisplay = "Ligne matiere nbeleves moyenne\n"+
+                                "0 anglais 41 10.2";
         assertEquals(targetDisplay, row1.display(""));
 
         //Ligne n°2
-        /*DataFrame row2 = new DataFrame(dataFrame);
-        row2 = row2.selectLines(row2, "1");
+        DataFrame row2 = dataFrame.selectLines("1");
         targetDisplay = "Ligne matiere nbeleves moyenne\n"+
-                "1 francais 23 14.2";
+                "0 francais 23 14.2";
         assertEquals(targetDisplay, row2.display(""));
 
 
         //Ligne n°2
-        DataFrame row3 = dataFrame.selectLines(dataFrame, "2");
+        DataFrame row3 = dataFrame.selectLines("2");
         targetDisplay = "Ligne matiere nbeleves moyenne\n"+
-                "2 mathematiques 32 7.2";
+                "0 mathematiques 32 7.2";
         assertEquals(targetDisplay, row3.display(""));
 
         //Ligne n°3
-        DataFrame row4 = dataFrame.selectLines(dataFrame, "3");
+        DataFrame row4 = dataFrame.selectLines("3");
         targetDisplay = "Ligne matiere nbeleves moyenne\n"+
-                "3 histoire 12 11.4";
-        assertEquals(targetDisplay, row4.display(""));*/
+                "0 histoire 12 11.4";
+        assertEquals(targetDisplay, row4.display(""));
+
+        //Selection multiples de ligne
+
+        // 3 Lignes
+        DataFrame multipleRows = dataFrame.selectLines(":3");
+        targetDisplay = "Ligne matiere nbeleves moyenne\n" +
+                "0 anglais 41 10.2\n" +
+                "1 francais 23 14.2\n" +
+                "2 mathematiques 32 7.2";
+        assertEquals(targetDisplay, multipleRows.display(""));
+
+        // 2 Lignes
+        DataFrame multipleRows2 = dataFrame.selectLines(":2");
+        targetDisplay = "Ligne matiere nbeleves moyenne\n" +
+                "0 anglais 41 10.2\n" +
+                "1 francais 23 14.2";
+        assertEquals(targetDisplay, multipleRows2.display(""));
 
     }
 }
