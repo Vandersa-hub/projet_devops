@@ -8,12 +8,12 @@ public class TestCsvStats {
 
     @Before
     public void Initialize() {
-        data = new DataFrame("src/main/csv/csvTest.csv").getDataArray();
+        data = new DataFrame("src/main/resources/csv/csvTest.csv").getDataArray();
     }
 
     @Test
     public void shouldTestConstructor() {
-        DataFrame csv = new DataFrame("src/main/csv/csvTest.csv");
+        DataFrame csv = new DataFrame("src/main/resources/csv/csvTest.csv");
         Assert.assertEquals(csv.mean("moyenne"), 10.75, 0.0);
         Assert.assertEquals(csv.mean("nbeleves"), 27, 0.0);
         Assert.assertEquals(csv.max("nbeleves"), 41, 0.0);
