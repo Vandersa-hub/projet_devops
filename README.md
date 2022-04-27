@@ -26,6 +26,10 @@ Nous avons tenté de mettre en place une approche TDD(Test Driven Development) p
 
 #### Sélection
 
+Dans la partie séléction on a deux méthodes principales :
+Select Columns qui permet de creer un nouveau data frame en selectionnant le ou les colonne(s) souhaité(es). Cette méthode utilise un worker "Select column" qui selectionne une seule colonne puis l'ajoute au nouveau dataframe. On répete cette opération jusqu'a ce que les colonnes demandées soient toutes dans le nouveau dataframe.
+Select Lines qui permet de créer un nouveau data frame en selectionnant les lignes souhaité(es). Cette méthode utilise un worker "createSubDataFrame" qui permet d'extraire une ligne et de creer un nouveau dataframe correspondant à celle-ci. On répete l'operation jusqu'à ce que les lignes demandées soient toutes dans le nouveau dataframe.
+
 
 #### Statistique
 
